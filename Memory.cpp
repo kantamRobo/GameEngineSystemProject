@@ -3,7 +3,7 @@
 #include <string>
 
 
-void memory::Init(int in_max_size, int initialsize)
+void  memory::Init(int in_max_size, int initialsize)
 {
 	buffer.maxsize = in_max_size;
 
@@ -12,14 +12,14 @@ void memory::Init(int in_max_size, int initialsize)
 
 }
 
-int* memory::allocate(int size_to_add)
+int* LinearAllocator::allocate(int size_to_add)
 {
-	if (buffer.currentsize + size_to_add < buffer.maxsize) {
+	if (currentsize + size_to_add < maxsize) {
 
-		int  new_size = buffer.currentsize + size_to_add;
+		int  new_size = currentsize + size_to_add;
 
 
-		buffer.currentsize = new_size;
+		currentsize = new_size;
 
 		auto alloc = allocator.allocate(size_to_add);
 	
@@ -34,14 +34,24 @@ int* memory::allocate(int size_to_add)
 	return nullptr;
 }
 
-void memory::deallocate(int size_to_remove)
+void LinearAllocator::deallocate(int size_to_remove)
 {
-	if (buffer.currentsize > 0)
+	if (currentsize > 0)
 	{
 		
-		allocator.deallocate(&buffer.currentsize,size_to_remove);
-		buffer.currentsize -= size_to_remove;
+		allocator.deallocate(&currentsize,size_to_remove);
+		currentsize -= size_to_remove;
 
 	}
 
+}
+
+void* MallocAllocator::allocate(int size)
+{
+	return allocator.allocate( size);
+}
+
+void MallocAllocator::deallocate(int* pointer, int size_to_remove)
+{
+	allocator.deallocate(pointer, size_to_remove);
 }
