@@ -127,10 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="GameEngineSystemProject.cpp" />
     <ClCompile Include="Memory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="File.h" />
     <ClInclude Include="Memory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
