@@ -1,8 +1,10 @@
+#include <stdexcept>
 #include "File.h"
+#include "Memory.h"
 #include <fstream>
 #include <istream>
-#include <stdexcept>
-bool Open(const char* filepath)
+
+bool File::Open(const char* filepath)
 {
 	std::ifstream ifs(filepath);
 
@@ -19,9 +21,9 @@ bool Open(const char* filepath)
 	return true;
 }
 
-bool Close(const char* filepath)
+bool File::Close(const char* file)
 {
-	std::ifstream ifs(filepath);
+	std::ifstream ifs(file);
 
 	if (ifs)
 	{

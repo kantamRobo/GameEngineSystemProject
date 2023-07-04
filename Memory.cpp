@@ -1,7 +1,7 @@
 #include "Memory.h"
 #include <stdexcept>
 #include <string>
-
+#include "File.h"
 
 void  memory::Init(int in_max_size, int initialsize)
 {

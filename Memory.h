@@ -1,12 +1,31 @@
 #pragma once
 #include <memory>
+#include <vector>
+template  <class T>
 struct  LinearAllocator  {
 	int maxsize;
 	int currentsize;
-	std::allocator<int> allocator; //Žb’è“I‚Éint‚É‚µ‚Ä‚¨‚­
-	int* allocate(int new_size);
+	std::vector<T> allocator; //Žb’è“I‚Éint‚É‚µ‚Ä‚¨‚­
+	void allocate(T& newinstance)
+	{
+		allocator.push_back(newinstance);
+	}
 
-	void deallocate(int size_to_remove);
+	void deallocate(T& instance)
+	{
+		
+		for(auto i=0;i<allocator.size()i++){
+		if(allocator[i]==instance)
+			allocator.erase(instance);
+		}
+		else
+		{
+			throw std::runtime_error("Instance‚Í‘¶Ý‚µ‚Ü‚¹‚ñ");
+		}
+
+
+
+	}
 
 };
 struct MallocAllocator {
@@ -17,11 +36,14 @@ struct MallocAllocator {
 
 	void deallocate(int* pointer,int size_to_remove);
 };
-namespace memory {
-	LinearAllocator buffer;
+template <class T>
+struct memory {
+	
+	
 	
 	void Init(int in_max_size,int initialsize);
 	
+
 
 	
 
