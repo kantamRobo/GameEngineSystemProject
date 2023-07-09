@@ -3,7 +3,7 @@
 #include "Memory.h"
 #include <fstream>
 #include <istream>
-
+template <class T>
 bool File::Open(const char* filepath)
 {
 	std::ifstream ifs(filepath);
@@ -36,4 +36,10 @@ bool File::Close(const char* file)
 		return false;
 	}
 	return true;
+}
+
+template<class T>
+bool File<T>::CreateDirectory(const LPCWSTR filepath)
+{
+	return false;
 }

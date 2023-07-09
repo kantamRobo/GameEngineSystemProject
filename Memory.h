@@ -3,12 +3,13 @@
 #include <vector>
 template  <class T>
 struct  LinearAllocator  {
-	int maxsize;
-	int currentsize;
+	
 	std::vector<T> allocator; //Žb’è“I‚Éint‚É‚µ‚Ä‚¨‚­
 	void allocate(T& newinstance)
 	{
-		allocator.push_back(newinstance);
+		
+			allocator.push_back(newinstance);
+		
 	}
 
 	void deallocate(T& instance)
