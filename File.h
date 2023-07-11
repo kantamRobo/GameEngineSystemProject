@@ -1,6 +1,5 @@
 #pragma once
-#include <fstream>
-#include <istream>
+
 
 template <class T>
 class File {
