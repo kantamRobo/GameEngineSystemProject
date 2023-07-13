@@ -1,4 +1,4 @@
-#include "MemoryMap.h"
+#include "VirtualMemory.h"
 
 #define MAPPED_FILE_NAME "Test File Mapping Object"
 #define MUTEX_NAME "Test Mutex Object"
@@ -8,7 +8,7 @@ typedef struct {
 } SHARED_DATA;
 
 
-auto MemoryMap::MapFileView()
+auto VirtualMemory::MapFileView()
 {
 	BOOL bAlreadyExists; /* 既にファイルマッピングオブジェクトが作成されているかどうかを表す真偽値 */
 	auto hMap = CreateFileMapping(
@@ -25,7 +25,7 @@ auto MemoryMap::MapFileView()
 	return pdata;
 }
 
-void MemoryMap::UnmapFileView(LPVOID Data)
+void VirtualMemory::UnmapFileView(LPVOID Data)
 {
 
 	UnmapViewOfFile(Data);

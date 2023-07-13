@@ -1,6 +1,6 @@
 #pragma once
 #include <Windows.h>
-class MemoryMap
+class VirtualMemory
 {
 	auto MapFileView();
 	void UnmapFileView(LPVOID Data);
