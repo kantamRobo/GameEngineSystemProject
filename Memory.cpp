@@ -22,3 +22,6 @@ void MallocAllocator::deallocate(int* pointer, int size_to_remove)
 {
 	allocator.deallocate(pointer, size_to_remove);
 }
+
+
+
