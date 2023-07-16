@@ -11,7 +11,7 @@ struct FileInstance {
 };
 class FilePool {
 public:
-	
+
 	LinearAllocator<FileInstance> pool;
 
 	void Reserve(std::vector<FileInstance>& fileinstances)
@@ -25,7 +25,7 @@ public:
 
 	bool Open(const std::string& in_path)
 	{
-	//todo 二分探索にする
+		//todo 二分探索にする
 		for (int i = 0; i < pool.allocator.size(); i++)
 		{
 			if (pool.allocator[i].path == in_path)
@@ -34,12 +34,12 @@ public:
 				break;
 			}
 			else {
-				throw std::runtime_error("ファイルを読み取れません"); 
+				throw std::runtime_error("ファイルを読み取れません");
 			}
 
 		}
-		
-		
+
+
 		return true;
 	}
 
@@ -73,7 +73,7 @@ public:
 		return result;
 	}
 
-	
+
 	bool  RemoveDirectory(const LPCWSTR dirpath)
 	{
 		// ディレクトリを削除する

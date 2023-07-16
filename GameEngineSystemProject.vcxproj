@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="File.cpp" />
-    <ClCompile Include="FilePool.cpp" />
     <ClCompile Include="GameEngineSystemProject.cpp" />
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Process.cpp" />
@@ -137,7 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File.h" />
-    <ClInclude Include="FilePool.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Process.h" />
     <ClInclude Include="VirtualMemory.h" />
