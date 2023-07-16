@@ -1,45 +1,65 @@
 #pragma once
+#include <istream>
+#include <fstream>
+#include <string>
+#include <map>
 
+struct FileInstance {
+	std::ifstream file;
 
-template <class T>
-class File {
+	std::string path;
+};
+class FilePool {
 public:
+	
+	LinearAllocator<FileInstance> pool;
 
-	LinearAllocator<T> fileallocator;
-	bool Open(const char* filepath)
+	void Reserve(std::vector<FileInstance>& fileinstances)
 	{
-		std::ifstream ifs(filepath);
+		for (auto& instance : fileinstances)
+		{
+			pool.allocate(instance);
+		}
 
-		if (ifs)
+	}
+
+	bool Open(const std::string& in_path)
+	{
+	//todo 二分探索にする
+		for (int i = 0; i < pool.allocator.size(); i++)
 		{
-			ifs.open(filepath);
-			return true;
+			if (pool.allocator[i].path == in_path)
+			{
+				pool.allocator[i].file.open(in_path);
+				break;
+			}
+			else {
+				throw std::runtime_error("ファイルを読み取れません"); 
+			}
+
 		}
-		else
-		{
-			throw std::runtime_error("ファイルを読み取れません");
-			return false;
-		}
+		
+		
 		return true;
 	}
 
-	bool Close(const char* filepath)
+	bool Close(const std::string& in_path)
 	{
 		{
-			std::ifstream ifs(file);
+			for (int i = 0; i < pool.allocator.size(); i++)
+			{
+				if (pool.allocator[i].path == in_path)
+				{
+					pool.allocator[i].file.close();
+					break;
+				}
+				else {
+					throw std::runtime_error("ファイルを読み取れません");
+				}
 
-			if (ifs)
-			{
-				ifs.close();
-				return true;
 			}
-			else
-			{
-				throw std::runtime_error("ファイルを読み取れません");
-				return false;
-			}
-			return true;
 		}
+		return true;
 	}
 	bool CreateDirectory(const LPCWSTR dirpath)
 	{
@@ -53,16 +73,11 @@ public:
 		return result;
 	}
 
-	void ReserveFileBuffer(const char* file)
-	{
-		std::ifstream instance(file);
-		fileallocator<std::ifstream>.allocate(instance);
-	}
-
+	
 	bool  RemoveDirectory(const LPCWSTR dirpath)
 	{
 		// ディレクトリを削除する
-		bool result = RemoveDirectory(dirName);
+		bool result = RemoveDirectory(dirpath);
 		if (!result)
 		{
 			// ディレクトリの削除に失敗した場合の処理
@@ -73,3 +88,4 @@ public:
 		return result;
 	}
 };
+

@@ -1,10 +1,10 @@
 #pragma once
 #include <memory>
 #include <vector>
+
 template  <class T>
-struct  LinearAllocator  {
-	
-	std::vector<T> allocator; //Žb’è“I‚Éint‚É‚µ‚Ä‚¨‚­
+struct  LinearAllocator {
+	std::vector<T> allocator;
 	void allocate(T& newinstance)
 	{
 		
@@ -16,8 +16,9 @@ struct  LinearAllocator  {
 	{
 		
 		for(auto i=0;i<allocator.size()i++){
-		if(allocator[i]==instance)
-			allocator.erase(instance);
+			if (allocator[i] == instance)
+				instance = nullptr;
+			allocator.erase(allocator.begin()+i);
 		}
 		else
 		{
