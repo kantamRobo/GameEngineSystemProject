@@ -38,18 +38,16 @@ struct MallocAllocator {
 
 	void deallocate(int* pointer,int size_to_remove);
 };
-template <class T>
-struct memory {
 
 
 
-	void Init(int in_max_size, int initialsize);
 
 
 
-	sizet memory_align(int alignement)
+
+	size_t memory_align(size_t size, int alignment)
 	{
-		const sizet alignmentmask = aligment - 1;
+		const size_t alignmentmask = alignment - 1;
 		
 		return (size + alignmentmask) & ~alignmentmask;
 	}
@@ -115,4 +113,16 @@ struct memory {
 
 これらのメリットにより、`size_t` 型はメモリやデータのサイズを表現するために便利な型となっています。特に、ポータブルなコードの記述やメモリ操作関数との互換性の確保、数学的な操作の適用など、メモリサイズに関連する処理で広く使用されています。
 */
+};
+
+struct StackAllocator
+{
+
+
+	void* Allocate(size_t size, size_t alignment);
+	void  Deallocate(void* pointer);
+	uint8_t* memory;
+	size_t                       total_size = 0;
+	size_t                       allocated_size = 0;
+
 };

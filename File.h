@@ -46,16 +46,9 @@ public:
 	bool Close(const std::string& in_path)
 	{
 		{
-			for (int i = 0; i < pool.allocator.size(); i++)
-			{
-				if (pool.allocator[i].path == in_path)
-				{
-					pool.allocator[i].file.close();
-					break;
-				}
-				else {
-					throw std::runtime_error("ƒtƒ@ƒCƒ‹‚ð“Ç‚ÝŽæ‚ê‚Ü‚¹‚ñ");
-				}
+			auto find = std::lower_bound(pool.allocator.begin(), pool.allocator.end(), in_path);
+				
+			auto file = std::distance(pool.allocator.begin(), find);
 
 			}
 		}
